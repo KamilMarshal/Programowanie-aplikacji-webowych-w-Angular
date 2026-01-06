@@ -1,0 +1,74 @@
+<app-top-theme-switch></app-top-theme-switch>
+
+<div class="profile-container">
+  <div class="content">
+    <div class="profile-header">
+      <div class="avatar">
+        <img [src]="userProfile.avatar_url" alt="Avatar"/>
+      </div>
+      <h2 class="username">{{ userProfile.username }}</h2>
+    </div>
+    <div class="userinfo">
+      <span class="lewy">Rola:</span> <span class="prawy">{{userProfile.role}}</span>
+      <span class="lewy">Poziom:</span> <span class="prawy">{{userProfile.level}}</span>
+      <span class="lewy">Data utworzenia:</span> <span class="prawy">{{ userProfile.createdAt | date:'dd/MM/yyyy' }}</span>
+    </div>
+    <div class="tabs">
+      <button
+        class="tab"
+        [class.active]="tab === 'user'"
+        (click)="setTab('user')"
+      >
+        Moje statystyki
+      </button>
+      <button
+        class="tab"
+        [class.active]="tab === 'global'"
+        (click)="setTab('global')"
+      >
+        Globalne statystyki
+      </button>
+    </div>
+
+    @if (tab === 'user') {
+      <div class="card">
+        <h3>Moje statystyki</h3>
+        <p>📊 Odpowiedzi: {{ stats.user.totalAnswers }}</p>
+        <p>✅ Poprawne odpowiedzi: {{ stats.user.correctAnswers }}</p>
+        <p>🎯 Skuteczność: {{ stats.user.accuracy }}%</p>
+        <p>🧠 Średnia z testów: {{ stats.user.avgTestAccuracy }}%</p>
+        <p>🧾 Liczba testów: {{ stats.user.totalTests }}</p>
+      </div>
+    }
+
+    @if (tab === 'global') {
+      <div class="card">
+        <h3>Statystyki globalne</h3>
+        <p>🌍 Wszystkich odpowiedzi: {{ stats.global.totalAnswers }}</p>
+        <p>✅ Poprawne odpowiedzi: {{ stats.global.correctAnswers }}</p>
+        <p>🎯 Średnia skuteczność: {{ stats.global.accuracy }}%</p>
+
+        <div class="separator"></div>
+
+        <h4>🏆 Ranking</h4>
+        @for (u of stats.global.rankedUsers; track u.username) {
+          <p>{{ u.username }} — {{ u.avgAccuracy }}%</p>
+        }
+
+        <div class="separator"></div>
+
+        <h4>📅 Aktywność miesięczna</h4>
+        @for (entry of stats.global.monthlyActivity | keyvalue; track entry.key) {
+          <p>{{ entry.key }}: {{ entry.value }} testów</p>
+        }
+
+        <div class="separator"></div>
+
+        <h4>🧩 Skuteczność wg puli</h4>
+        @for (p of stats.global.poolsAccuracy; track p.pool) {
+          <p>{{ p.pool }}: {{ p.avgAccuracy }}%</p>
+        }
+      </div>
+    }
+  </div>
+</div>

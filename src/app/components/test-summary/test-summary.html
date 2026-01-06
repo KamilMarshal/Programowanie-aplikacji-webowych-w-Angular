@@ -1,0 +1,59 @@
+<div
+  class="card"
+  [class.pass]="passed"
+  [class.fail]="!passed"
+>
+  <h2 class="title" [class.pass]="passed" [class.fail]="!passed">
+    Podsumowanie {{ isExam ? 'egzaminu' : 'testu' }}
+  </h2>
+
+  <div class="content">
+    <div class="row">
+      <span class="label">Zdobyte punkty:</span>
+      <span>{{ correct }}/{{ total }}</span>
+    </div>
+
+    <div class="row">
+      <span class="label">Procent:</span>
+      <span>{{ percent }}%</span>
+    </div>
+
+    <div class="row">
+      <span class="label">Wynik:</span>
+      <span class="result" [class.pass]="passed" [class.fail]="!passed">
+        {{ passed ? 'Pozytywny' : 'Negatywny' }}
+      </span>
+    </div>
+
+    @if (timeSpent) {
+      <div class="row">
+        <span class="label">Czas trwania:</span>
+        <span>{{ minutes }} min {{ seconds }} s</span>
+      </div>
+    }
+
+    <div class="row">
+      <span class="label">Data ukończenia:</span>
+      <span>
+        {{ date | date:'dd.MM.yyyy HH:mm' }}
+      </span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="btn" (click)="retry.emit()">
+      {{ isExam ? 'Wyjdź do menu' : 'Spróbuj ponownie' }}
+    </button>
+  </div>
+</div>
+
+@for (a of answers; let i = $index; track a.question.id) {
+  <app-question
+    [question]="a.question"
+    [initialSelected]="a.selected"
+    [readonly]="true"
+    [test]="false"
+    [number]="i + 1"
+    [QuestionsNumber]="answers.length"
+  ></app-question>
+}

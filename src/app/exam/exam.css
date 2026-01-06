@@ -1,0 +1,169 @@
+.scroll-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  margin-top: 100px;
+}
+
+.content {
+  width: 50%;
+  max-width: 700px;
+  min-width: 400px;
+}
+
+/*config*/
+.card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header {
+  text-align: center;
+}
+.header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+.header p {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: 18px;
+  text-align: justify;
+  color: var(--muted-foreground);
+}
+
+label {
+  font-size: 14px;
+}
+
+select {
+  width: 180px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+option {
+  font-size: 14px;
+  color: var(--primary);
+  background-color: var(--muted);
+}
+
+.selector {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.error {
+  text-align: center;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.start-btn {
+  margin-top: 16px;
+  width: 80%;
+  align-self: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.exam-level-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.exam-level-container h3 {
+  color: var(--destructive);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.exam-button {
+  width: 80%;
+  padding: 0.5rem 0;
+  background-color: var(--muted);
+  color: #FF9800;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.exam-button:hover {
+  opacity: 0.9;
+}
+
+/* Alert Dialog */
+.alert-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.alert-dialog {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+}
+
+.alert-dialog h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: black;
+}
+
+.alert-dialog p {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: black;
+}
+
+.alert-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.alert-cancel {
+  padding: 0.5rem 1rem;
+  border: 1px solid hsl(0 0% 80%);
+  background: hsl(0 0% 94%);
+  cursor: pointer;
+  border-radius: 4px;
+  color: black;
+}
+
+.alert-start {
+  padding: 0.5rem 1rem;
+  background-color: var(--red-600);
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}

@@ -1,0 +1,68 @@
+<app-top-theme-switch [protected]="true"></app-top-theme-switch>
+<div class="scroll-container">
+  <div class="content">
+    @if (config) {
+      <div class="card">
+        <div class="header">
+          <h2>EGZAMIN</h2>
+          <p>
+            To próbny egzamin przygotowany tak, aby jak najwierniej odzwierciedlał warunki egzaminu właściwego.
+            Przed Tobą 30 pytań wylosowanych z wybranej puli. Na każde pytanie masz 120 sekund.
+            Po udzieleniu odpowiedzi nie ma możliwości powrotu do poprzednich pytań.
+            Aby zaliczyć egzamin, musisz uzyskać co najmniej 75% poprawnych odpowiedzi.
+            Skup się, czytaj pytania uważnie i kontroluj czas. Powodzenia!
+          </p>
+        </div>
+        <div class="exam-level-container">
+          <h3>Egzamin na szczebel:</h3>
+
+          <button class="exam-button" (click)="onStartAlert('1')">
+            Centralny
+          </button>
+          <button class="exam-button" (click)="onStartAlert('0')">
+            Okręgowy
+          </button>
+        </div>
+
+        <!-- Alert Dialog -->
+        @if (isAlertOpen) {
+          <div class="alert-backdrop">
+            <div class="alert-dialog">
+              <h2>Egzamin na Szczebel {{ level === '1' ? 'Centralny' : 'Okręgowy' }}</h2>
+              <p>
+                Egzamin składa się z 30 pytań. Na każde pytanie masz 120s.
+                Egzamin rozpocznie się po naciśnięciu przycisku Start
+              </p>
+              <div class="alert-actions">
+                <button class="alert-cancel" (click)="closeAlert()">Anuluj</button>
+                <button class="alert-start" (click)="onStartButton()">Start</button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+
+    } @else if (showSummary) {
+      <app-test-summary
+        [isExam]="true"
+        (retry)="goBack()"
+        [timeSpent]="getElapsedSeconds()"
+      />
+
+    } @else {
+      <app-question
+        [question]="questions[currentIndex]"
+        [last]="currentIndex === questionsNumber - 1"
+        (answered)="  handleAnswered($event)"
+        (next)="nextQuestion()"
+        [test]="true"
+        [number]="currentIndex+1"
+        [QuestionsNumber]="30"
+      />
+    }
+
+  </div>
+</div>
+
+

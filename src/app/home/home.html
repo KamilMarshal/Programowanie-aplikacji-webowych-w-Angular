@@ -1,0 +1,32 @@
+<!-- Główna zawartość -->
+<app-top-theme-switch/>
+<div class="home">
+  <div class="image-wrapper">
+    <img
+      src='HandballQuizAppChatGenerated1.png'
+      alt="Handball Quiz"
+    />
+  </div>
+
+  <div class="buttons-wrapper">
+    <Button class="btn" (click)="navigate('/random-question')">
+      Rozwiązuj losowe zadanie
+    </Button>
+
+    <Button class="btn" (click)="navigate('/test')">
+      Rozwiązuj test
+    </Button>
+
+    <Button class="btn" (click)="navigate('/exam')">
+      Rozwiąż próbny egzamin
+    </Button>
+
+    <Button class="btn orange" (click)="navigate('/catalogue')">
+      Katalog pytań
+    </Button>
+
+    <Button class="btn gray" (click)="navigate('/rules')">
+      Przepisy gry
+    </Button>
+  </div>
+</div>

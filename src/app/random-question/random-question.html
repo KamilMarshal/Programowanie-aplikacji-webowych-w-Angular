@@ -1,0 +1,9 @@
+<app-top-theme-switch [protected]="true"></app-top-theme-switch>
+<div class="scroll-container">
+  <div class="content">
+    <app-question [test]="false"
+                  [question]="question"
+                  (next)="nextQuestion()"
+    ></app-question>
+  </div>
+</div>

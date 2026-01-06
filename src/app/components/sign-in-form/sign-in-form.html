@@ -1,0 +1,70 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Zaloguj się do HandballQuiz!</h1>
+    <p>Witaj ponownie! Zaloguj się aby kontynuować</p>
+  </div>
+
+  <div class="card-content">
+    <div class="field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        placeholder="jan.kowalski@google.com"
+        [(ngModel)]="email"
+      />
+    </div>
+
+    <div class="field">
+      <div class="password-label">
+        <label for="password">Hasło</label>
+        <button class="link-btn" (click)="goToForgotPassword()">
+          Zapomniałeś hasła?
+        </button>
+      </div>
+
+      <input
+        id="password"
+        type="password"
+        [(ngModel)]="password"
+        (keyup.enter)="submit()"
+      />
+    </div>
+
+    <button class="primary-btn" (click)="submit()" [disabled]="loading">
+      Zaloguj
+    </button>
+    @if (loading) {
+      <div class="loader">Ładowanie…</div>
+    }
+
+    @if (errorMessage) {
+      <div class="error">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <p class="register">
+      Nie masz jeszcze konta?
+      <button class="link-btn" (click)="goToSignUp()">
+        Zarejestruj się
+      </button>
+    </p>
+
+    <div class="separator">
+      <span></span>
+      <p>lub</p>
+      <span></span>
+    </div>
+
+    <!-- placeholder pod SocialConnections -->
+    <div class="social-placeholder">
+      <button class="social-btn" (click)="goToHome()" [disabled]="loading">
+        <img src="https://img.clerk.com/static/google.png?width=14" width="24px">
+      </button>
+      <button class="social-btn" (click)="goToHome()" [disabled]="loading">
+        <img src="https://img.clerk.com/static/discord.png?width=14" width="24px">
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+.card {
+  margin: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px solid;
+}
+
+.card.pass {
+  border-color: #43A047;
+}
+
+.card.fail {
+  border-color: #D32F2F;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.title.pass {
+  color: #66BB6A;
+}
+
+.title.fail {
+  color: #D32F2F;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.result {
+  font-weight: 700;
+}
+
+.result.pass {
+  color: #43A047;
+}
+
+.result.fail {
+  color: #D32F2F;
+}
+
+.footer {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #D32F2F;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="header">
+    <h2>Pytanie
+      @if (test || readonly) {
+        {{ number }}/{{ QuestionsNumber }}
+        @if (checked) {
+          ({{ question.number }})
+        }
+      } @else {
+        {{ question.number }}
+      }
+    </h2>
+    @if (!readonly && test) {
+      <app-progress-bar
+        #timer
+        [duration]="120"
+        [questionId]="question.id"
+        [startFrom]="restoredTimeMs"
+        (finished)="goNext()"
+        (tick)="saveProgress($event)"
+      ></app-progress-bar>
+    <!--    <button (click)="timer.pause()">Pause</button>-->
+    <!--    <button (click)="timer.resume()">Resume</button>-->
+    }
+
+    <p class="question-text">{{ question.text }}</p>
+
+    @if (checked) {
+      <div class="score">
+        {{ isCorrect ? '1 / 1 pkt' : '0 / 1 pkt' }}
+      </div>
+    }
+  </div>
+
+  <div class="answers">
+    @for (entry of question.answers | keyvalue; track entry.key) {
+      <button
+        class="answer-btn"
+        [class]="answerClass(entry.key)"
+        (click)="toggleAnswer(entry.key)"
+      >
+        <strong>{{ entry.key }})</strong> {{ entry.value }}
+      </button>
+    }
+  </div>
+
+    <div class="footer">
+
+      @if (!test && !checked && !readonly) {
+        <button class="primary" (click)="checkAnswer()">
+          Sprawdź
+        </button>
+      }
+
+      @if (checked && !test) {
+        <div class="after-check">
+          @if (question.rule) {
+            <div class="rule">
+              <strong>Przepisy:</strong><br/>
+              {{ question.rule }}
+            </div>
+          }
+        </div>
+      }
+
+      @if (catalogue && checked) {
+        <button class="secondary" (click)="resetQuestion()">
+          Wyczyść
+        </button>
+      }
+      @else if ((!test && checked && !last && !readonly) ||
+      (test && !checked && !last)) {
+        <button class="secondary" (click)="goNext()">
+          Następne
+        </button>
+      }
+      @else if (test && !checked && last && !readonly) {
+        <button class="secondary last" (click)="finishTest()">
+          Zakończ test
+        </button>
+      }
+    </div>
+
+</div>

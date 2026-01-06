@@ -1,0 +1,17 @@
+<div class="progress-all">
+  <div class="timer-text">
+    Pozostały czas: {{ secondsLeft }}s
+  </div>
+  <div class="progress-container">
+    <div
+      class="progress-fill"
+      [style.width.%]="progress"
+      [ngClass]="{
+        red: progress < 25,
+        orange: progress >= 25 && progress < 50,
+        green: progress >= 50
+        }"
+    ></div>
+  </div>
+</div>
+

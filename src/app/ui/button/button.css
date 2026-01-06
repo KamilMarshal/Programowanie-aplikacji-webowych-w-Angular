@@ -1,0 +1,81 @@
+:host {
+  display: inline-flex;
+}
+
+button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+:host(.btn--disabled) button {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+:host(.btn--default) button {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+:host(.btn--default) button:hover {
+  opacity: 0.9;
+}
+
+
+:host(.btn--destructive) button {
+  background: var(--destructive);
+  color: white;
+}
+
+:host(.btn--outline) button {
+  background: var(--background);
+  border: 1px solid var(--border);
+}
+
+:host(.btn--outline) button:hover {
+  background: var(--accent);
+}
+
+:host(.btn--secondary) button {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+:host(.btn--ghost) button:hover {
+  background: var(--accent);
+}
+
+:host(.btn--link) button {
+  background: none;
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+:host(.btn--default) button {
+  height: 2.5rem;
+  padding: 0 1rem;
+}
+
+:host(.btn--sm) button {
+  height: 2.25rem;
+  padding: 0 0.75rem;
+}
+
+:host(.btn--lg) button {
+  height: 2.75rem;
+  padding: 0 1.5rem;
+}
+
+:host(.btn--icon) button {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}

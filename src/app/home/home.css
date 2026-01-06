@@ -4,12 +4,13 @@
   align-items: center;
   padding: 1rem;
   background: var(--background);
-  min-height: 100vh;
+  margin-top: 100px;
+
 }
 
 .image-wrapper {
   width: 200px;
-  margin-top: 1.5rem;
+  margin-top: 3.5rem;
   overflow: hidden;
 }
 
@@ -28,14 +29,32 @@
   gap: 0.75rem;
 }
 
-.ui-button.btn {
-  width: 80%;
-  background-color: var(--secondary);
+.btn {
+  width: 400px;
+  padding: 0.1rem 0;
+  background-color: var(--primary-foreground);
+  border: 2px solid var(--muted);
+  border-radius: 0.5rem;
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--red-600);
+  cursor: pointer;
 }
 
-.ui-button.btn.orange {
+.btn:hover {
+  background-color: var(--primary-foreground)/50;
+}
+
+.btn.orange {
   color: var(--orange-600);
+}
+
+
+.btn.gray {
+  color: var(--muted-foreground);
+
+}
+.btn.gray:hover {
+  background-color: var(--primary-foreground);
+  cursor: default;
 }

@@ -1,0 +1,15 @@
+img {
+  color: var(--primary);
+
+}
+
+button {
+  border-color: var(--muted);
+  background-color: var(--primary-foreground);
+}
+
+option {
+  font-size: 14px;
+  color: var(--primary);
+  background-color: var(--muted);
+}

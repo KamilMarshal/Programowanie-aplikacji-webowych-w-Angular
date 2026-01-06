@@ -1,0 +1,66 @@
+<app-top-theme-switch [protected]="true"></app-top-theme-switch>
+<div class="scroll-container">
+  <div class="content">
+    @if (config) {
+      <div class="card">
+        <div class="header">
+          <h2>TEST</h2>
+          <p>
+            Ten tryb służy do ćwiczeń i nauki, bez presji egzaminu. Liczba pytań oraz pula, z której są losowane, zależą
+            od ustawień wybranych wcześniej przez użytkownika. Na każde pytanie obowiązuje limit czasu, jednak test ma
+            charakter szkoleniowy i pozwala sprawdzić swoją wiedzę w wybranym zakresie.
+            Traktuj go jako okazję do utrwalenia przepisów i przygotowania się do egzaminu właściwego.
+          </p>
+        </div>
+        <div class="config">
+          <div class="selector">
+            <label>Wybierz liczbę pytań:</label>
+
+            <select [(ngModel)]="questionsNumber">
+              @for (n of availableNumbers(); track n) {
+                <option [value]="n">{{ n }} pytań</option>
+              }
+            </select>
+          </div>
+          <div class="selector">
+            <label>Wybierz pulę pytań:</label>
+
+            <select [(ngModel)]="pool">
+              @for (p of pools; track p.value) {
+                <option [value]="p.value">{{ p.label }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        @if (errorMessage) {
+          <div class="error">
+            {{ errorMessage }}
+          </div>
+        }
+        <button class="start-btn" (click)="startTest()">
+          Rozpocznij test
+        </button>
+      </div>
+
+
+    } @else if (showSummary) {
+      <app-test-summary
+        (retry)="resetTest()"
+      />
+
+    } @else {
+      <app-question
+        [question]="questions[currentIndex]"
+        [last]="currentIndex === questionsNumber - 1"
+        (answered)="  handleAnswered($event)"
+        (next)="nextQuestion()"
+        [test]="true"
+        [number]="currentIndex+1"
+        [QuestionsNumber]="questionsNumber"
+      />
+    }
+
+  </div>
+</div>
+
+

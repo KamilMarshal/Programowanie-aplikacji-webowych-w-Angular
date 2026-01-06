@@ -1,0 +1,31 @@
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 0.1s linear, background-color 0.2s ease;
+}
+
+.timer-text {
+  margin-top: 4px;
+  font-size: 12px;
+  text-align: right;
+}
+
+.red {
+  background-color: #EF5350;
+}
+
+.orange {
+  background-color: #FFA726;
+}
+
+.green {
+  background-color: #66BB6A;
+}
+

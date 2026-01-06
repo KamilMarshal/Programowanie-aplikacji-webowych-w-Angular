@@ -1,0 +1,40 @@
+<app-top-theme-switch></app-top-theme-switch>
+
+<div class="scroll-container">
+  <div class="content">
+    @if (config) {
+      <h2 class="title">Które przepisy chcesz przeglądać?</h2>
+
+      <div class="rules-list">
+        @for (rule of rules; track rule.id) {
+          <button class="rule-button" (click)="selectRule(rule)">
+            {{ rule.id !== '0' && rule.id !== 'RSZ' ? rule.id + '. ' : '' }}
+            {{ rule.name }}
+          </button>
+        }
+      </div>
+    } @else {
+      <div class="selected-rule">
+        <h2>{{ ruleName }}</h2>
+      </div>
+
+      <div class="questions-container">
+        @for (question of questionsToDisplay; track question.id) {
+          <app-question
+            [question]="question"
+            [test]="false"
+            [catalogue]="true"
+          />
+        }
+
+        @if (canLoadMore) {
+          <button class="load-more-button" (click)="loadMore()">
+            Wczytaj kolejne
+          </button>
+        }
+
+<!--        <button class="reset-button" (click)="reset()">Resetuj</button>-->
+      </div>
+    }
+  </div>
+</div>
