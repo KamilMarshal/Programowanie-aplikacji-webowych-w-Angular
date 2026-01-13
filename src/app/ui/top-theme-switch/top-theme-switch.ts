@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ThemeService} from '../../services/theme';
 import {SettingsService} from '../../services/settings-service';
 import {FormsModule} from '@angular/forms';
+import {supabase} from '../../lib/supabase';
 
 @Component({
   selector: 'app-top-theme-switch',
@@ -46,8 +47,8 @@ export class TopThemeSwitch implements OnInit {
     this.showSettings = false;
   }
 
-  logout() {
-    // this.authService.logout();
-    this.router.navigate(['/login']);
+  async logout() {
+    const { error } = await supabase.auth.signOut()
+    await this.router.navigate(['/login']);
   }
 }

@@ -1,8 +1,9 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {Question, QuestionMockup} from '../models/question';
+import {ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+import {Question} from '../models/question';
 import {QuestionComponent} from '../components/question/question';
 import {TopThemeSwitch} from '../ui/top-theme-switch/top-theme-switch';
 import {SettingsService} from '../services/settings-service';
+import {QuestionsService} from '../services/questions-service';
 
 interface Rule {
   id: string;
@@ -43,22 +44,36 @@ export class Catalogue implements OnInit {
     {id: 'RSZ', name: 'REGULAMIN STREFY ZMIAN'}
   ];
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(private settingsService: SettingsService,
+              private questionsService: QuestionsService,
+              private cdr: ChangeDetectorRef) {}
 
   config = true;
+  amount = 5;
+  offset = 0;
   selectedRule: Rule | null = null;
   questionsCount = 0;
-  loadedCount = this.questionsCount;
+  questions: Question[] = [];
+  canLoadMore = true;
+  loading = false;
+
 
   ngOnInit() {
     this.settingsService.questionsCount$.subscribe(count => {
-      this.questionsCount = count;
-      this.loadedCount = count;
+      this.amount = Number(count) || 5;
+
+      // jeśli jesteśmy już w katalogu, resetuj i ładuj od nowa
+      if (this.selectedRule) {
+        this.resetAndLoad();
+      }
     });
   }
 
-  get questionsToDisplay() {
-    return QuestionMockup.slice(0, this.loadedCount);
+  resetAndLoad() {
+    this.questions = [];
+    this.offset = 0;
+    this.canLoadMore = true;
+    this.loadQuestions();
   }
 
   get ruleName(): string {
@@ -68,17 +83,39 @@ export class Catalogue implements OnInit {
   selectRule(rule: Rule) {
     this.selectedRule = rule;
     this.config = false;
-    this.loadedCount = this.questionsCount;
+    this.resetAndLoad();
   }
 
-  loadMore() {
-    this.loadedCount = Math.min(
-      this.loadedCount + this.questionsCount,
-      QuestionMockup.length
+
+  get questionsToDisplay() {
+    return this.questions;
+  }
+
+  async loadQuestions() {
+    if (!this.selectedRule || !this.canLoadMore || this.loading) return;
+
+    this.loading = true;
+
+    const data = await this.questionsService.fetchQuestions(
+      this.selectedRule.id,
+      this.amount,
+      this.offset
     );
+
+    if (data.length) {
+      this.questions = [...this.questions, ...data];
+      this.offset += data.length;
+      this.canLoadMore = data.length === this.amount;
+    } else {
+      this.canLoadMore = false;
+    }
+    this.loading = false;
+    this.cdr.markForCheck();
+    console.log("pytania: ",this.questions);
+
   }
 
-  get canLoadMore(): boolean {
-    return this.loadedCount < QuestionMockup.length;
-  }
+
+
+
 }

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from '../../services/auth-service';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -15,10 +16,10 @@ export class SignInForm {
   loading = false;
   errorMessage = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private auth: AuthService) {
   }
 
-  submit() {
+  async submit() {
     this.errorMessage = '';
     this.loading = true;
 
@@ -28,16 +29,31 @@ export class SignInForm {
       return;
     }
 
-    // frontend mock
-    setTimeout(() => {
+    await this.login()
+  }
+
+  async login() {
+    this.loading = true;
+    this.errorMessage = '';
+
+    try {
+      const {error} = await this.auth.signInAnonymously();
+
+      if (error) {
+        this.errorMessage = error.message;
+        return;
+      }
+
+      await this.router.navigate(['/']);
+    } finally {
       this.loading = false;
-      this.router.navigate(['/']);
-    }, 1000);
+    }
   }
 
   private navigate(path: string) {
     this.router.navigate([path]);
   }
+
   goToForgotPassword() {
     this.navigate('/forgot-password');
   }
@@ -48,6 +64,10 @@ export class SignInForm {
 
   goToHome() {
     this.navigate('/');
+  }
+
+  async oAuthSign(type: any) {
+    this.login()
   }
 
 }

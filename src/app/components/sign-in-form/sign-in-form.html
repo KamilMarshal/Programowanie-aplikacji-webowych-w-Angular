@@ -59,10 +59,10 @@
 
     <!-- placeholder pod SocialConnections -->
     <div class="social-placeholder">
-      <button class="social-btn" (click)="goToHome()" [disabled]="loading">
+      <button class="social-btn" (click)="oAuthSign('google')" [disabled]="loading">
         <img src="https://img.clerk.com/static/google.png?width=14" width="24px">
       </button>
-      <button class="social-btn" (click)="goToHome()" [disabled]="loading">
+      <button class="social-btn" (click)="oAuthSign('discord')" [disabled]="loading">
         <img src="https://img.clerk.com/static/discord.png?width=14" width="24px">
       </button>
     </div>

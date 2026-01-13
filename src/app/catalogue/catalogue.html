@@ -22,14 +22,15 @@
         @for (question of questionsToDisplay; track question.id) {
           <app-question
             [question]="question"
-            [test]="false"
             [catalogue]="true"
+            [test]="false"
           />
         }
 
+
         @if (canLoadMore) {
-          <button class="load-more-button" (click)="loadMore()">
-            Wczytaj kolejne
+          <button class="load-more-button" (click)="loadQuestions()" [disabled]="loading">
+            {{ loading ? 'Ładowanie...' : 'Wczytaj kolejne' }}
           </button>
         }
 
